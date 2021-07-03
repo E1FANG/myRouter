@@ -1,3 +1,19 @@
+const div1 = document.createElement('duv')
+div1.innerHTML = '1'
+const div2 = document.createElement('duv')
+div2.innerHTML = '2'
+const div3 = document.createElement('duv')
+div3.innerHTML = '3'
+const div4 = document.createElement('duv')
+div4.innerHTML = '4'
+
+const routeTable = {
+  '1':div1,
+  '2':div2,
+  '3':div3,
+  '4':div4
+}
+
 function route() {
   let number = window.location.hash.substr(1)
   let app = document.querySelector('#app');
@@ -5,18 +21,14 @@ function route() {
   number = number || 1;
 
   // 获取界面
-  let div = document.querySelector(`#div${number}`);
+  let div = routeTable[number.toString()]
   if (!div) {
     div = document.querySelector(`#error_route`);
   }
   div.style.display = 'block'
 
     // 展示界面
-  if (app.children.length > 0) {
-    app.children[0].style.display = 'none'
-    console.log(app.children[0]);
-    document.body.appendChild(app.children[0]);
-  }
+  app.innerHTML = '';
   app.appendChild(div);
 }
 
