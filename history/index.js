@@ -15,9 +15,11 @@ const routeTable = {
   '4':div4
 }
 
-function route(container) {
-  let number = window.location.hash.substr(1)
+const publicPath = '/history/'
 
+function route(container) {
+  let number = window.location.pathname;
+  console.log(number);
   number = number || 1;
 
   // 获取界面
@@ -32,7 +34,23 @@ function route(container) {
   container.appendChild(div);
 }
 
+const allA = document.querySelectorAll('a.link')
+
+for(let a of allA){
+  a.addEventListener('click',e=>{
+    e.preventDefault()
+    const href = publicPath + a.getAttribute('href')
+    console.log(href);
+    window.history.pushState(null,`page${href}`,href)
+    onStateChange(href)
+  })
+}
 route(app);
-window.addEventListener('hashchange', () => {
-  route(app);
-});
+
+function onStateChange(){
+  route(app)
+}
+
+// window.addEventListener('hashchange', () => {
+//   route(app);
+// });
