@@ -18,9 +18,9 @@ const routeTable = {
 const publicPath = '/history/'
 
 function route(container) {
-  let number = window.location.pathname;
+  let number = window.localStorage.getItem('xxx')
   console.log(number);
-  if(number === '/'){
+  if(!number){
     number = '/1'
   }
 
@@ -41,10 +41,8 @@ const allA = document.querySelectorAll('a.link')
 for(let a of allA){
   a.addEventListener('click',e=>{
     e.preventDefault()
-    // const href = publicPath + a.getAttribute('href')
     const href =a.getAttribute('href')
-    console.log(href);
-    window.history.pushState(null,`page${href}`,href)
+    window.localStorage.setItem('xxx',href)
     onStateChange(href)
   })
 }
